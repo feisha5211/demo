@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>时钟</title>
+    <style type="text/css">
+		#canvas{
+			display: block;
+			margin: 0 auto;
+		}
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="1024" height="600"></canvas>
+	
+	<script type="text/javascript" src="./digit.js"></script>
+	<script type="text/javascript">
+		var canvas = document.getElementById('canvas');
+		var context = canvas.getContext('2d');
+
+		var RADIUS = 8;
+		var LEFT   = 50;
+		var TOP    = 50;
+
+		var date = new Date();
+		var h = date.getHours();
+		var m = date.getMinutes();
+		var s = date.getSeconds();
+
+		drawNum(LEFT, TOP, parseInt(h/10), context);
+		drawNum(LEFT + 15 * RADIUS + 6, TOP, h%10, context);
+		drawNum(LEFT + 30 * RADIUS + 12, TOP, 10, context);
+		drawNum(LEFT + 39 * RADIUS + 15, TOP, parseInt(m/10), context);
+		drawNum(LEFT + 54 * RADIUS + 21, TOP, m%10, context);
+		drawNum(LEFT + 69 * RADIUS + 27, TOP, 10, context);
+		drawNum(LEFT + 78 * RADIUS + 30, TOP, parseInt(s/10), context);
+		drawNum(LEFT + 93 * RADIUS + 36, TOP, s%10, context);
+		
+		function drawNum(x, y, num, ctx) {
+			for (var i = 0; i < digit[num].length; i++) {
+				for ( var j = 0; j < digit[num][i].length; j++) {
+					if (digit[num][i][j] == 1) {
+						var _x = x + (2 * RADIUS * j) + RADIUS + j;
+						var _y = y + (2 * RADIUS * i) + RADIUS + i;
+						drawShap(_x, _y, RADIUS, ctx);
+					}
+				}
+			}
+		}
+
+		function drawShap(x, y, r, ctx) {
+			ctx.beginPath();
+			ctx.arc(x, y, r, 0, 2*Math.PI);
+			ctx.closePath();
+
+			ctx.fillStyle = '#005588';
+			ctx.fill();
+		}
+	</script>
+</body>
+</html>

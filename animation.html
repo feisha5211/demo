@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>小球</title>
+</head>
+<body>
+	<canvas id="canvas" width='1024' height='600'></canvas>
+	<script type="text/javascript">
+
+	var canvas = document.getElementById('canvas');
+	var context = canvas.getContext('2d');
+
+	canvas.style.display = 'block';
+	canvas.style.border = '1px solid #aaa';
+	canvas.style.margin = '0 auto';
+
+	var ball = {x:480, y:80, r:20, g:2, vx:-6, vy:-15, color:'#aaa'};
+
+
+	setInterval(function() {
+		render(context);
+		update();
+	}, 50);
+
+	function update() {
+		ball.x += ball.vx;
+		ball.y += ball.vy;
+		ball.vy += ball.g;
+
+		if (ball.y + ball.r > canvas.height) {
+			ball.y = canvas.height - ball.r;
+			ball.vy = -ball.vy * 0.5;
+		}
+	}
+
+	function render(cxt) {
+		cxt.clearRect(0, 0, cxt.canvas.width, cxt.canvas.height);
+
+		cxt.beginPath();
+		cxt.arc( ball.x, ball.y, ball.r, 0 , 2*Math.PI);
+		cxt.closePath();
+		cxt.fill();
+	}
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>画一个五角星</title>
+	<style type="text/css">
+		#canvas{
+			/*width: 600px;*/
+			/*height: 600px;*/
+			border: 1px solid #555;
+			display: block;
+			margin: 0 auto;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas">您的浏览器不支持canvas请升级浏览器</canvas>
+
+	<script type="text/javascript">
+	window.onload = function() {
+		var canvas = document.getElementById('canvas');
+		canvas.width = 600;
+		canvas.height = 600;
+		var context = canvas.getContext("2d");
+
+		// context.beginPath();
+		// for (var i = 0; i <5; i++) {
+		// 	var big_deg = (18 + i * 72) / 180 * Math.PI;
+		// 	var small_deg = (54 + i * 72) / 180 * Math.PI;
+		// 	context.lineTo( Math.cos( big_deg ) * 250 + 300 , -Math.sin( big_deg ) * 250  + 300 );
+		// 	context.lineTo( Math.cos( small_deg ) * 150 + 300, -Math.sin( small_deg ) * 150 + 300 );
+		// }
+		// context.closePath();
+
+		// context.lineWidth = 10;
+		// context.stroke();
+		drawStar(context, 250, 100, 300, 300);
+
+		function drawStar(cxt, R, r, x, y) {
+			cxt.beginPath();
+			for (var i = 0; i <5; i++) {
+				var big_deg = (18 + i * 72) / 180 * Math.PI;
+				var small_deg = (54 + i * 72) / 180 * Math.PI;
+				cxt.lineTo( Math.cos( big_deg ) * R + x , -Math.sin( big_deg ) * R  + y );
+				cxt.lineTo( Math.cos( small_deg ) * r + x, -Math.sin( small_deg ) * r + y );
+			}
+			cxt.closePath();
+
+			cxt.lineWidth = 10;
+			cxt.stroke();
+		}
+	}
+	</script>
+</body>
+</html>
